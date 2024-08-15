@@ -24,6 +24,6 @@ public class BookController {
         //4.when Spring receives the request to the /books url it will execute the books method providing the method to model
         //4.The model object will add the attribute called books, which will return to the viewer the info required
 
-        return "books"; //2 declaration of the getBooks method returning the attribute model books
+        return "books/list"; //2 declaration of the getBooks method returning the attribute model books
     }
 }

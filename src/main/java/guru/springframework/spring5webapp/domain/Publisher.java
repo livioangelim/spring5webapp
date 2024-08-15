@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Created by jt on 12/23/19.
+ */
 @Entity
 public class Publisher {
 
@@ -11,11 +14,11 @@ public class Publisher {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String addressName;
+    private String name;
     private String addressLine1;
-    private String addressCity;
-    private String addressState;
-    private String addressZip;
+    private String city;
+    private String state;
+    private String zip;
 
     @OneToMany
     @JoinColumn(name = "publisher_id")
@@ -36,20 +39,27 @@ public class Publisher {
     public String toString() {
         return "Publisher{" +
                 "id=" + id +
-                ", name='" + addressName + '\'' +
+                ", name='" + name + '\'' +
                 ", addressLine1='" + addressLine1 + '\'' +
-                ", addressCity='" + addressCity + '\'' +
-                ", addressState='" + addressState + '\'' +
-                ", addressZip='" + addressZip + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zip='" + zip + '\'' +
                 '}';
     }
 
-    public Publisher(String name, String addressLine1, String addressCity, String addressState, String addressZip) {
-        this.addressName = name;
-        this.addressLine1 = addressLine1;
-        this.addressCity = addressCity;
-        this.addressState = addressState;
-        this.addressZip = addressZip;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Publisher publisher = (Publisher) o;
+
+        return id != null ? id.equals(publisher.id) : publisher.id == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 
     public Long getId() {
@@ -60,12 +70,12 @@ public class Publisher {
         this.id = id;
     }
 
-    public String getAddressName() {
-        return addressName;
+    public String getName() {
+        return name;
     }
 
-    public void setAddressName(String name) {
-        this.addressName = name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAddressLine1() {
@@ -76,40 +86,27 @@ public class Publisher {
         this.addressLine1 = addressLine1;
     }
 
-    public String getAddressCity() {
-        return addressCity;
+    public String getCity() {
+        return city;
     }
 
-    public void setAddressCity(String addressCity) {
-        this.addressCity = addressCity;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String getAddressState() {
-        return addressState;
+    public String getState() {
+        return state;
     }
 
-    public void setAddressState(String addressState) {
-        this.addressState = addressState;
+    public void setState(String state) {
+        this.state = state;
     }
 
-    public String getAddressZip() {
-        return addressZip;
+    public String getZip() {
+        return zip;
     }
 
-    public void setAddressZip(String addressZip) {
-        this.addressZip = addressZip;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Publisher publisher = (Publisher) o;
-        return id != null ? id.equals(publisher.id) : publisher.id == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+    public void setZip(String zip) {
+        this.zip = zip;
     }
 }

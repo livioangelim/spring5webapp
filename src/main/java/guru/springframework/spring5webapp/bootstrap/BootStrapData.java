@@ -35,9 +35,9 @@ public class BootStrapData implements CommandLineRunner {
 
         //Add publisher with arguments
         Publisher publisher = new Publisher();
-        publisher.setAddressName("Publisher Name Example");
-        publisher.setAddressCity("Publisher City Example");
-        publisher.setAddressState("Publisher State Example");
+        publisher.setName("Publisher Name Example");
+        publisher.setCity("Publisher City Example");
+        publisher.setState("Publisher State Example");
 
         publisherRepository.save(publisher); //add publisher info
 
