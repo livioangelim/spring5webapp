@@ -33,31 +33,26 @@ public class BootStrapData implements CommandLineRunner {
 
         System.out.println("Started in Bootstrap");
 
-
-        //Add author
-        Author eric = new Author("Eric", "Evans");
-        //Add book
-        Book ddd = new Book("Domain Driven Design", "123123");
-
-        //Constructor for Publisher
-
-        //Add publisher
+        //Add publisher with arguments
         Publisher publisher = new Publisher();
         publisher.setAddressName("Publisher Name Example");
         publisher.setAddressCity("Publisher City Example");
         publisher.setAddressState("Publisher State Example");
-        //add publisher info
-        publisherRepository.save(publisher);
-        //print publisher for functionality test
-        System.out.println("Publisher Count: " + publisherRepository.count());
 
+        publisherRepository.save(publisher); //add publisher info
 
+        System.out.println("Publisher Count: " + publisherRepository.count()); //print publisher for functionality test
+
+        Author eric = new Author("Eric", "Evans"); //Add author object
+        Book ddd = new Book("Domain Driven Design", "123123"); //Add book object
 
         authorRepository.save(eric); //save author before adding and saving book
         eric.getBooks().add(ddd); //input the book from this author
         ddd.getAuthors().add(eric); //input the author from this book
         bookRepository.save(ddd); //then save the book
-
+        ddd.setPublisher(publisher); //after publisher creation, add the publisher to the 'ddd' book
+        publisher.getBooks().add(ddd); //add ddd to the publisher
+        publisherRepository.save(publisher); //save the publisher
 
 
 
@@ -69,9 +64,13 @@ public class BootStrapData implements CommandLineRunner {
         rod.getBooks().add(noEJB);
         noEJB.getAuthors().add(rod);
         bookRepository.save(noEJB);
+        noEJB.setPublisher(publisher);
+        publisher.getBooks().add(noEJB);
+        publisherRepository.save(publisher);
 
         //print to test the functionality for Books and Authors
         System.out.println("Number of Books: " + bookRepository.count());
+        System.out.println("Publisher Number of books: " + publisher.getBooks().size());
     }
 
 }
